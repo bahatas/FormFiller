@@ -1,8 +1,14 @@
 package com.app.formfiller.controller;
 
+import com.app.formfiller.dto.Dto;
 import com.app.formfiller.utilities.ConfigurationReader;
 import com.app.formfiller.utilities.Driver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,19 +27,37 @@ public class MainController {
 
     private final String UPLOAD_DIR = "./uploads/";
 
-    @GetMapping({"/","/welcome"})
-    public String getForm(){
+
+    @GetMapping({"/", "/welcome"})
+    public String getForm() {
 
 
-        return "Dashboard.html";
+        return "dashboard.html";
     }
 
-    @GetMapping({"/navigate"})
-    public String navigate(){
+    @PostMapping({"/navigate"})
+    public String navigate(String url, Model model, Dto dto) {
 
-        String url = ConfigurationReader.get("url");
-        Driver.get().get(url);
-        return "Dashboard.html";
+
+        model.addAttribute("appurl", dto);
+//        String urlbackup = "https://www.google.com";
+//        Driver.get().get(urlbackup);
+
+        System.out.println(Driver.get().getTitle());
+        return "dashboard.html";
+    }
+
+    @GetMapping({"/navigate-url"})
+    public String navigate() {
+        String urlbackup = "https://www.google.com";
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.get(urlbackup);
+
+
+
+        System.out.println(driver.getTitle());
+        return "directpage.html";
     }
 
     @PostMapping("/upload")
