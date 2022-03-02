@@ -1,13 +1,18 @@
 package com.app.formfiller.controller;
 
 import com.app.formfiller.dto.Dto;
+import com.app.formfiller.pages.LoginPage;
+import com.app.formfiller.service.AutomateService;
 import com.app.formfiller.utilities.ConfigurationReader;
 import com.app.formfiller.utilities.Driver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +28,15 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Controller
+@Slf4j
 public class MainController {
 
+
+    @Autowired
+    private AutomateService automateService;
+
     private final String UPLOAD_DIR = "./uploads/";
+
 
 
     @GetMapping({"/", "/welcome"})
@@ -40,24 +51,17 @@ public class MainController {
 
 
         model.addAttribute("appurl", dto);
-//        String urlbackup = "https://www.google.com";
-//        Driver.get().get(urlbackup);
 
         System.out.println(Driver.get().getTitle());
         return "dashboard.html";
     }
 
     @GetMapping({"/navigate-url"})
-    public String navigate() {
-        String urlbackup = "https://www.google.com";
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.get(urlbackup);
+    public String navigate() throws InterruptedException {
+    automateService.getautomate();
 
 
-
-        System.out.println(driver.getTitle());
-        return "directpage.html";
+      return "directpage.html";
     }
 
     @PostMapping("/upload")
