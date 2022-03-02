@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formfiller</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot & Thymeleaf File Upload</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot & Thymeleaf File Upload</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<section class="my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2>Upload File Example</h2>
+                <h1>Form filler</h1>
+                <form action="/action_page.php">
+                    <label for="fname">Paste FORM URL:</label>
+                    <input type="text" id="fname" name="fname"><br><br>
+                    <label for="file">Last name:</label>
+                    <input type="text" id="file" name="file"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+                <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+                <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="file" name="file" class="form-control-file">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload File</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
