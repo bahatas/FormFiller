@@ -18,4 +18,11 @@ public class LoginPage {
 
     @FindBy(xpath = "//button[@type='submit']")
     public  WebElement submit;
+
+
+    @FindBy(xpath="//span[@data-i18n='Grid' and .='Products']")
+    public WebElement productsLinkFromDashBoard;
+
+    @FindBy(xpath="//span[@data-i18n='UI Kit' and .='Stock Management']")
+    public WebElement stockManagementLink;
 }
