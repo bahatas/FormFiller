@@ -5,6 +5,7 @@ import com.app.formfiller.pages.LoginPage;
 import com.app.formfiller.service.AutomateService;
 import com.app.formfiller.utilities.ConfigurationReader;
 import com.app.formfiller.utilities.Driver;
+import com.opencsv.exceptions.CsvValidationException;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -57,11 +58,16 @@ public class MainController {
     }
 
     @GetMapping({"/navigate-url"})
-    public String navigate() throws InterruptedException {
-    automateService.getautomate();
+    public String navigate() throws InterruptedException, CsvValidationException, IOException {
+        automateService.getautomate();
+        Thread.sleep(2000);
+        log.info("navigate Product page called");
+        automateService.navigateProductPage();
+        Thread.sleep(2000);
+        automateService.fillForm();
 
 
-      return "directpage.html";
+        return "directpage.html";
     }
 
     @PostMapping("/upload")

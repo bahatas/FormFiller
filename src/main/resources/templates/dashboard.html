@@ -4,7 +4,7 @@
     <title>Form filler </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
-<body>
+<body style="background-color:powderblue;">
 
 <section class="my-5">
     <div class="container">
@@ -34,7 +34,9 @@
                     <label for="fname">Paste FORM URL:</label>-->
                                         <input type="text" id="fname" name="fname">
                     <br>
-                    <input type="submit" class="btn btn-primary" value="Submit" >
+                    <div>
+                        <a  class="btn btn-primary"  th:href="@{/navigate-url}" > Start Automation </a>
+                    </div>
                 </div>
             </div>
         </div>
